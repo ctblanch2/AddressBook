@@ -77,7 +77,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>app.WebController</mainClass>
+                            <mainClass>app.SpringBootLauncher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
