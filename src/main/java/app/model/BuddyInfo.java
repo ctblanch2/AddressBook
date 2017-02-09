@@ -10,6 +10,7 @@ public class BuddyInfo {
     @Id
     private String name;
     private String number;
+    private String address;
 
     public BuddyInfo(){
 
@@ -19,6 +20,15 @@ public class BuddyInfo {
         this.name = name;
         this.number = number;
     }
+
+    public BuddyInfo(String name, String number, String address) {
+        this(name, number);
+        this.address = address;
+    }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
 
     public String getName() {
         return name;
@@ -48,6 +58,7 @@ public class BuddyInfo {
 
         BuddyInfo buddyInfo = (BuddyInfo) o;
 
+        if (address != null ? !address.equals(buddyInfo.address) : buddyInfo.address != null);
         if (name != null ? !name.equals(buddyInfo.name) : buddyInfo.name != null) return false;
         return number != null ? number.equals(buddyInfo.number) : buddyInfo.number == null;
     }

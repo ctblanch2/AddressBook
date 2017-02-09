@@ -1,5 +1,7 @@
 package app;
 
+import org.springframework.test.web.servlet.result.*;
+import static org.hamcrest.Matchers.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
 import static org.junit.Assert.*;
@@ -50,9 +53,11 @@ public class WebControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/createAddressBook"))
                 .andExpect(status().isOk());
 
-        mvc.perform(MockMvcRequestBuilders.get("/addBuddy?id=1&name=Cameron&number=1234567890"))
+        mvc.perform(MockMvcRequestBuilders.get("/addBuddy?id=1&name=Cameron&number=1234567890&address=1622Blohm"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("{\"name\":\"Cameron\",\"number\":\"1234567890\"}")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name", is("Cameron")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.number", is("1234567890")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.address", is("1622Blohm")));
     }
 
     @Test
@@ -60,10 +65,12 @@ public class WebControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/createAddressBook"))
                 .andExpect(status().isOk());
 
-
         mvc.perform(MockMvcRequestBuilders.get("/getBuddies?id=1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("[{\"name\":\"Cameron\",\"number\":\"1234567890\"}]")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name", is("Cameron")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].number", is("1234567890")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].address", is("1622Blohm")));
     }
+
 
 }

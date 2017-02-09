@@ -34,8 +34,8 @@ public class WebController {
     }
 
     @RequestMapping(value="/addBuddy", method=GET)
-    public BuddyInfo addBuddyInfo(@RequestParam(value="id") Long id, @RequestParam(value="name") String name, @RequestParam(value="number") String number) {
-        BuddyInfo buddy = new BuddyInfo(name, number);
+    public BuddyInfo addBuddyInfo(@RequestParam(value="id") Long id, @RequestParam(value="name") String name, @RequestParam(value="number") String number, @RequestParam(value="address") String address) {
+        BuddyInfo buddy = new BuddyInfo(name, number, address);
         AddressBook book = repo.findById(id).get(0);
         book.addBuddy(buddy);
         buddyRepo.save(buddy);
