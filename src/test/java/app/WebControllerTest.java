@@ -1,5 +1,7 @@
 package app;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.springframework.test.web.servlet.result.*;
 import static org.hamcrest.Matchers.*;
 import org.junit.Test;
@@ -41,7 +43,13 @@ import static org.junit.Assert.*;
 public class WebControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    private  MockMvc mvc;
+
+    @Before
+    public void setup() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/createAddressBook"));
+    }
+
     @Test
     public void createAddressBook() throws Exception{
         mvc.perform(MockMvcRequestBuilders.get("/createAddressBook"))
@@ -50,9 +58,6 @@ public class WebControllerTest {
 
     @Test
     public void addBuddy() throws Exception{
-        mvc.perform(MockMvcRequestBuilders.get("/createAddressBook"))
-                .andExpect(status().isOk());
-
         mvc.perform(MockMvcRequestBuilders.get("/addBuddy?id=1&name=Cameron&number=1234567890&address=1622Blohm"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name", is("Cameron")))
@@ -62,9 +67,6 @@ public class WebControllerTest {
 
     @Test
     public void getBuddies() throws Exception{
-        mvc.perform(MockMvcRequestBuilders.get("/createAddressBook"))
-                .andExpect(status().isOk());
-
         mvc.perform(MockMvcRequestBuilders.get("/getBuddies?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].name", is("Cameron")))
