@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
-@RequestMapping("fancy")
+@RequestMapping("rest")
 public class WebController {
 
     @Autowired
@@ -28,10 +29,16 @@ public class WebController {
     BuddyInfoRepository buddyRepo;
 
     @RequestMapping("/createAddressBook")
-    public Long createAddressBook(){
+    public Long createAddressBook(@RequestParam(value="name", defaultValue="No Name") String name){
         AddressBook book = new AddressBook();
+        book.setName(name);
         repo.save(book);
         return book.getId();
+    }
+
+    @RequestMapping("/listAddressBooks")
+    public Iterable<AddressBook> listAddressBooks(){
+        return repo.findAll();
     }
 
     @RequestMapping(value="/addBuddy", method=GET)
@@ -58,7 +65,4 @@ public class WebController {
         List<AddressBook> books = repo.findById(id);
         return books.get(0).getBuddies();
     }
-
-
-
 }

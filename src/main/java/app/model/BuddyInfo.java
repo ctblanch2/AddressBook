@@ -2,15 +2,26 @@ package app.model; /**
  * Created by cameronblanchard on 1/12/2017.
  */
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class BuddyInfo {
 
-    @Id
+    private Long id;
     private String name;
     private String number;
     private String address;
+
+    @Id
+    @GeneratedValue
+    public Long getId(){
+        return this.id;
+    }
+
+    public void setId(Long id){
+        this.id = id;
+    }
 
     public BuddyInfo(){
 

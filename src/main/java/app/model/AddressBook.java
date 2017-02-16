@@ -21,6 +21,7 @@ public class AddressBook {
 
     private Long id;
     private List<BuddyInfo> buddies;
+    private String name;
 
     public AddressBook() {
          this.buddies = new ArrayList<BuddyInfo>();
@@ -43,6 +44,14 @@ public class AddressBook {
 
     public void setBuddies(List<BuddyInfo> buddies){
         this.buddies = buddies;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     @Override

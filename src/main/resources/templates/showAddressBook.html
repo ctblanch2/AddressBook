@@ -10,9 +10,9 @@
     <form action="#" th:object="${buddyList}" method="post">
         <p th:each="buddy : ${buddyList}">
             <p>
-                Name: <b><span th:text="${buddy.name}"/></b>
-                Phone Number: <b><span th:text="${buddy.number}"/></b>
-                Address: <b><span th:text="${buddy.number}"/></b>
+                Name: <span th:text="${buddy.name}"/>
+                Phone: <span th:text="${buddy.number}"/>
+                Address: <span th:text="${buddy.address}"/>
             </p>
         </p>
     </form>
