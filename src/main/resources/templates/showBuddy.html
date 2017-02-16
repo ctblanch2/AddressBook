@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buddy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form action="#" method="post">
+    <h1>This is a Buddy!</h1>
+    <form action="#" th:object="${buddy}" method="post">
+        <p th:text="'Name: ' + ${buddy.name}" />
+        <p th:text="'Number: ' + ${buddy.number}" />
+        <p th:text="'Address: ' + ${buddy.address}" />
+        <a th:href="@{/basic/showAddressBook(id=${addressBookId})}">Back to the book</a>
+    </form>
+</form>
+</body>
+</html>

@@ -15,6 +15,7 @@ import java.util.List;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
+@RequestMapping("fancy")
 public class WebController {
 
     @Autowired
@@ -57,5 +58,7 @@ public class WebController {
         List<AddressBook> books = repo.findById(id);
         return books.get(0).getBuddies();
     }
+
+
 
 }
