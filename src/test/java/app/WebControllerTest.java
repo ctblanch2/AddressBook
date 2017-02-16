@@ -47,18 +47,18 @@ public class WebControllerTest {
 
     @Before
     public void setup() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/createAddressBook"));
+        mvc.perform(MockMvcRequestBuilders.get("/rest/createAddressBook"));
     }
 
     @Test
     public void createAddressBook() throws Exception{
-        mvc.perform(MockMvcRequestBuilders.get("/createAddressBook"))
+        mvc.perform(MockMvcRequestBuilders.get("/rest/createAddressBook"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void addBuddy() throws Exception{
-        mvc.perform(MockMvcRequestBuilders.get("/addBuddy?id=1&name=Cameron&number=1234567890&address=1622Blohm"))
+        mvc.perform(MockMvcRequestBuilders.get("/rest/addBuddy?id=1&name=Cameron&number=1234567890&address=1622Blohm"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name", is("Cameron")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.number", is("1234567890")))
@@ -67,7 +67,7 @@ public class WebControllerTest {
 
     @Test
     public void getBuddies() throws Exception{
-        mvc.perform(MockMvcRequestBuilders.get("/getBuddies?id=1"))
+        mvc.perform(MockMvcRequestBuilders.get("/rest/getBuddies?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].name", is("Cameron")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].number", is("1234567890")))
