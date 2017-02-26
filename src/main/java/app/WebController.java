@@ -30,6 +30,7 @@ public class WebController {
 
     @RequestMapping("/createAddressBook")
     public Long createAddressBook(@RequestParam(value="name", defaultValue="No Name") String name){
+        System.out.println(name);
         AddressBook book = new AddressBook();
         book.setName(name);
         repo.save(book);
@@ -51,7 +52,7 @@ public class WebController {
         return buddy;
     }
 
-    @RequestMapping(value="removeBuddy")
+    @RequestMapping(value="/removeBuddy")
     public String removeBuddyInfo(@RequestParam(value="id") Long id, @RequestParam(value="name") String name){
         BuddyInfo info = buddyRepo.findByName(name).get(0);
         AddressBook book = repo.findById(id).get(0);
